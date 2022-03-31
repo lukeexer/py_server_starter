@@ -1,6 +1,6 @@
 __pycache__
 slib/__pycache__
 test/__pycache__
-log/*
-.coverage
 *.pyc
+.coverage
+.vscode

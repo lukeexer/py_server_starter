@@ -14,12 +14,14 @@ class SCheck():
         string = string.strip()
 
         if len(string) > max_length:
-            err_msg = f'[{lebel}]: String length is greater than expectation.'
+            err_msg = f'[{lebel}]: String length is greater than expectation. \
+                The input value is: {string}'
             SLog.warning(err_msg)
             raise InvalidInput(err_msg)
 
         if len(string) < min_length:
-            err_msg = f'[{lebel}]: String length is less than expectation.'
+            err_msg = f'[{lebel}]: String length is less than expectation. \
+                The input value is: {string}.'
             SLog.warning(err_msg)
             raise InvalidInput(err_msg)
 
@@ -34,17 +36,20 @@ class SCheck():
         try:
             int_val = int(string)
         except ValueError:
-            err_msg = f'[{lebel}]: String can not be converted to integer.'
+            err_msg = f'[{lebel}]: String can not be converted to integer. \
+                The input value is: {string}.'
             SLog.warning(err_msg)
             raise InvalidInput(err_msg) from ValueError
 
         if int_val > max_val:
-            err_msg = f'[{lebel}]: Integer value is greater than expectation.'
+            err_msg = f'[{lebel}]: Integer value is greater than expectation. \
+                The input value is: {string}.'
             SLog.warning(err_msg)
             raise InvalidInput(err_msg)
 
         if int_val < min_val:
-            err_msg = f'[{lebel}]: Integer value is less than expectation.'
+            err_msg = f'[{lebel}]: Integer value is less than expectation. \
+                The input value is: {string}.'
             SLog.warning(err_msg)
             raise InvalidInput(err_msg)
 

@@ -15,7 +15,7 @@ class SCache():
     '''Access default memory cache.'''
 
     @staticmethod
-    def init(host, port):
+    def init(host=None, port=None):
         '''Initialize memory cache.'''
         global SCACHE
 

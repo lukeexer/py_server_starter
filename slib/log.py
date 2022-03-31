@@ -7,8 +7,7 @@ from enum import Enum
 SLOG_LOGGER = None
 SLOG_AMOUNT_OF_KEEPED_LOG_FILE = 7
 
-SLOG_FILE_PATH = 'log/'
-SLOG_FILE_NAME = 'system.log'
+SLOG_DEFAULT_FILE = 'log/system.log'
 
 class SLogLevel(Enum):
     '''Define logging level Enumerations.'''
@@ -22,7 +21,7 @@ class SLog():
     '''Logging with default settings.'''
 
     @staticmethod
-    def init(level = SLogLevel.INFO):
+    def init(level = SLogLevel.INFO, file=None):
         '''intialize the logging system.'''
 
         global SLOG_LOGGER
@@ -30,10 +29,13 @@ class SLog():
         # format the log record
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 
-        full_path = SLOG_FILE_PATH + SLOG_FILE_NAME
-        handler = TimedRotatingFileHandler(full_path,
+        if file is None:
+            file = SLOG_DEFAULT_FILE
+
+        handler = TimedRotatingFileHandler(file,
                                             when='midnight',
                                             backupCount=SLOG_AMOUNT_OF_KEEPED_LOG_FILE)
+
         handler.setFormatter(formatter)
 
         SLOG_LOGGER = logging.getLogger(__name__)

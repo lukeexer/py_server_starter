@@ -16,12 +16,17 @@ class SConfig():
     '''Access default config file.'''
 
     @staticmethod
-    def init():
+    def init(file=None):
         '''Initialize config file.'''
+
         global SCONFIG_CONFIG_FILE
 
         conf = configparser.ConfigParser()
-        conf.read(SCONFIG_DEFAULT_CONFIG_FILE_NAME)
+
+        if file is None:
+            conf.read(SCONFIG_DEFAULT_CONFIG_FILE_NAME)
+        else:
+            conf.read(file)
 
         SCONFIG_CONFIG_FILE = conf
 
@@ -41,6 +46,7 @@ class SConfig():
     @staticmethod
     def get_int_conf(key):
         '''Get integer config with key.'''
+
         val = SConfig.get_str_conf(key)
         try:
             val = int(val)
@@ -52,6 +58,7 @@ class SConfig():
     @staticmethod
     def get_all_keys():
         '''Get all keys'''
+
         keys = []
 
         for key in SCONFIG_CONFIG_FILE[SCONFIG_DEFAULT_SECTION]:
@@ -62,6 +69,7 @@ class SConfig():
     @staticmethod
     def get_all_key_and_value_pairs():
         '''Get all keys and value pairs'''
+
         pairs = []
 
         for key in SCONFIG_CONFIG_FILE[SCONFIG_DEFAULT_SECTION]:
