@@ -2,7 +2,9 @@
 from flask import Blueprint
 from flask import jsonify
 
-from api.example.modules import MESSAGES
+from slib.log import SLog
+
+from server.example.modules import MESSAGES
 
 example = Blueprint('example', __name__)
 
@@ -10,6 +12,8 @@ example = Blueprint('example', __name__)
 @example.route('/hello')
 def hello_world():
     '''Hello demo endpoint.'''
+
+    SLog.info('Hello World!')
 
     return MESSAGES['default']
 

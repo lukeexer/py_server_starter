@@ -2,23 +2,14 @@
 """Server entry point."""
 import traceback
 
-from flask import Flask
-
 from slib.init import SInit
 from slib.log import SLog
-
-from api.example.views import example
+from server.server import SServer
 
 if __name__ == "__main__":
     try:
-        SInit.init()
-
-        app = Flask(__name__)
-        app.env="development"
-
-        app.register_blueprint(example)
-
-        app.run(host='0.0.0.0', port=5000, debug=False)
+        SInit.init(log_all_conf=False)
+        SServer.init(debug=False)
 
     except Exception as e:
         SLog.error(e)

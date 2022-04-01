@@ -9,7 +9,7 @@ class SInit():
     '''Initialize all configurations in slib when program start running.'''
 
     @staticmethod
-    def init():
+    def init(log_all_conf=False):
         '''Initialize all configurations when program start running.'''
         SBanner.show_banner()
 
@@ -18,7 +18,8 @@ class SInit():
 
         SLog.set_level(SLogLevel.DEBUG)
 
-        SLog.debug('All Configurations:')
-        pairs = SConfig.get_all_key_and_value_pairs()
-        for key, val in pairs:
-            SLog.debug(f'{key} = {val}')
+        if log_all_conf is True:
+            SLog.debug('All Configurations:')
+            pairs = SConfig.get_all_key_and_value_pairs()
+            for key, val in pairs:
+                SLog.debug(f'{key} = {val}')
