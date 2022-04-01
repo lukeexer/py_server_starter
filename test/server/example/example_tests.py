@@ -31,3 +31,4 @@ class TestSErverExample(unittest.TestCase):
         rv = cli.get('/')
 
         self.assertEqual(rv.status_code, 200)
+        self.assertTrue('Hello to the world of Falsk!' in rv.data.decode('utf-8'))
