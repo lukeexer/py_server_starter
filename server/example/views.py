@@ -4,7 +4,7 @@ from flask import jsonify
 
 from slib.log import SLog
 
-from server.example.modules import MESSAGES
+from server.example.models import MESSAGES
 
 example = Blueprint('example', __name__)
 

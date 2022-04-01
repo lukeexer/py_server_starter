@@ -1,6 +1,6 @@
 
 lint:
-	pylint ./slib ./test main.py
+	pylint ./slib ./test ./server run.py
 
 coverage:
 	coverage run -m unittest discover -s ./ -p "*_test.py"
@@ -13,4 +13,4 @@ coverage_branch:
 	coverage html
 
 test_all:
-	python -m unittest discover -s ./ -p "*_test.py"
+	python -m unittest discover -s ./ -p "*_tests.py"
