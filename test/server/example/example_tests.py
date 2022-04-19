@@ -5,7 +5,7 @@ from flask import Flask
 
 from slib.log import SLog
 
-from server.example.views import example
+from server.example.api import example
 
 class TestSErverExample(unittest.TestCase):
     '''Test case class.'''
@@ -28,7 +28,7 @@ class TestSErverExample(unittest.TestCase):
 
         cli = app.test_client()
 
-        rv = cli.get('/')
+        ret = cli.get('/')
 
-        self.assertEqual(rv.status_code, 200)
-        self.assertTrue('Hello to the world of Falsk!' in rv.data.decode('utf-8'))
+        self.assertEqual(ret.status_code, 200)
+        self.assertTrue('Hello to the world of Falsk!' in ret.data.decode('utf-8'))

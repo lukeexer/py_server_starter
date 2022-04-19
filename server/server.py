@@ -1,8 +1,11 @@
+# pylint: disable=R0903
+'''SLib Flask server.'''
 from flask import Flask
 
 from slib.config import SConfig
 
-from server.example.views import example
+from server.error.handler import handler
+from server.example.api import example
 
 class SServer():
     '''Logging with default settings.'''
@@ -16,6 +19,8 @@ class SServer():
 
         app = Flask(__name__)
         app.env = 'development'
+
+        app.register_blueprint(handler)
 
         # Register your server endpoint module here.
         app.register_blueprint(example)
