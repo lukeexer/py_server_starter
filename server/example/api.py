@@ -14,10 +14,7 @@ example = Blueprint('example', __name__)
 def hello_world():
     '''Hello demo endpoint.'''
 
-    repo = ExampleRepo()
-    service = ExampleService(repo)
-
-    msg = service.get_message('default')
+    msg = 'Hello to the world of Falsk!'
 
     SLog.info(msg)
 
