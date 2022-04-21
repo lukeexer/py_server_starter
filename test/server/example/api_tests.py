@@ -2,6 +2,7 @@
 import unittest
 
 from flask import Flask
+from http import HTTPStatus
 
 from slib.log import SLog
 
@@ -32,7 +33,7 @@ class TestSErverExample(unittest.TestCase):
 
         ret = self.cli.get('/')
 
-        self.assertEqual(ret.status_code, 200)
+        self.assertEqual(ret.status_code, HTTPStatus.OK)
         self.assertTrue('Hello to the world of Falsk!' in ret.data.decode('utf-8'))
 
     def test_show_key_path(self):
@@ -44,7 +45,7 @@ class TestSErverExample(unittest.TestCase):
 
         ret = self.cli.get('/show/' + test_key)
 
-        self.assertEqual(ret.status_code, 200)
+        self.assertEqual(ret.status_code, HTTPStatus.OK)
         self.assertTrue(expected_message in ret.data.decode('utf-8'))
 
     def test_json_get_path(self):
@@ -55,5 +56,5 @@ class TestSErverExample(unittest.TestCase):
 
         ret = self.cli.get('/json/get')
 
-        self.assertEqual(ret.status_code, 200)
+        self.assertEqual(ret.status_code, HTTPStatus.OK)
         self.assertTrue(expected_json in ret.data.decode('utf-8'))

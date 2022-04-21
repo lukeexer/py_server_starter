@@ -2,6 +2,7 @@
 import unittest
 
 from flask import Flask
+from http import HTTPStatus
 
 from slib.log import SLog
 
@@ -34,7 +35,7 @@ class TestSErverExample(unittest.TestCase):
 
         ret = self.cli.get('/path_not_exist')
 
-        self.assertEqual(ret.status_code, 500)
+        self.assertEqual(ret.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
         self.assertTrue(expected_ret_val in ret.data.decode('utf-8'))
 
     def test_method_not_allowed(self):
@@ -44,7 +45,7 @@ class TestSErverExample(unittest.TestCase):
 
         ret = self.cli.get('/post/example')
 
-        self.assertEqual(ret.status_code, 500)
+        self.assertEqual(ret.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
         self.assertTrue(expected_ret_val in ret.data.decode('utf-8'))
 
     def test_internal_server_error(self):
@@ -52,9 +53,9 @@ class TestSErverExample(unittest.TestCase):
 
         expected_ret_val = '''{"code":"S00004","msg":"internal server error"}'''
 
-        ret = self.cli.get('/error')
+        ret = self.cli.get('/error/server')
 
-        self.assertEqual(ret.status_code, 500)
+        self.assertEqual(ret.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
         self.assertTrue(expected_ret_val in ret.data.decode('utf-8'))
 
     def test_unknown_runtime_exception(self):
@@ -64,5 +65,5 @@ class TestSErverExample(unittest.TestCase):
 
         ret = self.cli.get('/error/exception')
 
-        self.assertEqual(ret.status_code, 500)
+        self.assertEqual(ret.status_code, HTTPStatus.INSUFFICIENT_STORAGE)
         self.assertTrue(expected_ret_val in ret.data.decode('utf-8'))
