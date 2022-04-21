@@ -66,7 +66,3 @@ class TestSErverExample(unittest.TestCase):
 
         self.assertEqual(ret.status_code, 500)
         self.assertTrue(expected_ret_val in ret.data.decode('utf-8'))
-
-
-
-
