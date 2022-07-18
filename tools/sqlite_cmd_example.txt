@@ -1,0 +1,6 @@
+tools/sqlite3.exe
+
+.open default.db
+.tables
+.schema table_name
+.quit

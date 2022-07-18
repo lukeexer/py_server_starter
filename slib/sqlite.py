@@ -7,7 +7,7 @@ from slib.config import SConfig
 SQLITE_FILE = None
 
 class MemoryCacheKeyNotFound(Exception):
-    '''Rised when key not found.'''
+    '''Raised when key not found.'''
 
 class SSqlite():
     '''Access Sqlite database.'''
@@ -56,3 +56,45 @@ class SSqlite():
         conn.close()
 
         return result
+
+    @staticmethod
+    def fetch_one(sql=None):
+        '''Fetch one query result from database.'''
+
+        conn = sqlite3.connect(SQLITE_FILE)
+
+        cur = conn.cursor()
+
+        cur.execute(sql)
+
+        result = cur.fetchone()
+
+        conn.commit()
+
+        conn.close()
+
+        return result
+
+    @staticmethod
+    def lazy_connect():
+        '''Get SQLite cursor.'''
+
+        conn = sqlite3.connect(SQLITE_FILE)
+
+        cur = conn.cursor()
+
+        return (conn, cur)
+
+    @staticmethod
+    def lazy_execute(cur, sql):
+        '''Execute SQL with cursor.'''
+
+        cur.execute(sql)
+
+    @staticmethod
+    def lazy_commit(conn):
+        '''Commit SQL commands.'''
+
+        conn.commit()
+
+        conn.close()

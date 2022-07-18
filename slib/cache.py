@@ -6,21 +6,22 @@ from slib.config import SConfig
 SCACHE = None
 
 class MemoryCacheHashKeyNotFound(Exception):
-    '''Rised when hash key not found.'''
+    '''Raised when hash key not found.'''
 
 class MemoryCacheKeyNotFound(Exception):
-    '''Rised when key not found.'''
+    '''Raised when key not found.'''
 
 class SCache():
     '''Access default memory cache.'''
 
     @staticmethod
-    def init(host=None, port=None):
+    def init(mock_cache=None):
+    #def init(host=None, port=None, mock_cache=None):
         '''Initialize memory cache.'''
         global SCACHE
 
-        if host is not None:
-            SCACHE = redis.StrictRedis(host, port, encoding="utf-8", decode_responses=True)
+        if mock_cache is not None:
+            SCACHE = mock_cache
         else:
             host = SConfig.get_str_conf('memory_cache_host')
             port = SConfig.get_int_conf('memory_cache_port')
@@ -58,7 +59,12 @@ class SCache():
     def hexists(hashkey, key):
         '''check whether the specified value exist.'''
 
-        return SCACHE.hexists(hashkey, key)
+        ret_val = SCACHE.hexists(hashkey, key)
+
+        if ret_val == 1:
+            return True
+
+        return False
 
     @staticmethod
     def hkeys(hashkey):

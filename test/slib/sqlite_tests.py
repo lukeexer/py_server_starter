@@ -46,3 +46,28 @@ class TestSSqlite(unittest.TestCase):
         result = SSqlite.fetch_all(sql)
 
         self.assertEqual(3, len(result))
+
+    def test_fetch_one(self):
+        '''Test fetch_one function.'''
+
+        sql = '''SELECT * FROM test_table WHERE test_int = 100;'''
+        result = SSqlite.fetch_one(sql)
+
+        self.assertEqual(4, len(result))
+        self.assertTrue(str('text 1') in result[1])
+
+    def test_lazy_execution(self):
+        '''Test lazy execution function sets.'''
+
+        (conn, cur) = SSqlite.lazy_connect()
+
+        sql = '''INSERT INTO test_table VALUES ('2009-04-06 15:21:32', 'text 4', 400, 4.26)'''
+
+        SSqlite.lazy_execute(cur, sql)
+
+        SSqlite.lazy_commit(conn)
+
+        sql = '''SELECT * FROM test_table'''
+        result = SSqlite.fetch_all(sql)
+
+        self.assertEqual(4, len(result))

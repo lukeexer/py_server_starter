@@ -1,6 +1,6 @@
-"Example API module."
-from flask import Blueprint, jsonify
+'''Example API module.'''
 from http import HTTPStatus
+from flask import Blueprint, jsonify
 
 from slib.log import SLog
 

@@ -7,10 +7,10 @@ SCONFIG_DEFAULT_SECTION = 'CONFIG'
 SCONFIG_CONFIG_FILE = None
 
 class ConfigNotFound(Exception):
-    '''Rised when config not found.'''
+    '''Raised when config not found.'''
 
 class ConfigDataTypeNotMatch(Exception):
-    '''Rised when config data type not match.'''
+    '''Raised when config data type not match.'''
 
 class SConfig():
     '''Access default config file.'''
